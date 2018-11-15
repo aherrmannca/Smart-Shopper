@@ -153,6 +153,10 @@ $(".to-scan-search-recipes").click(function(e) {
   window.location="Scan-Search-Recipes.html";
 });
 
+$(".to-scan-search").click(function(e) {
+  window.location="Scan-Search-Recipes.html";
+});
+
 $(".to-scan").click(function(e) {
   window.location="Prescan.html";
 });

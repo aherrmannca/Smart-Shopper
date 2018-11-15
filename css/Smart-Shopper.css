@@ -117,8 +117,7 @@ button.add-new {
 
 /* Blury Background */
 body {
-
-  background: #F5F6F7 url("../images/produce.jpg");
+  background: #F5F6F7 url("../images/Produce.jpg");
   background-size: 100% 100%;
 }
 
@@ -223,10 +222,12 @@ body {
     left: 25%;
 }
 
-.btn-hover.color-2 {
-    background-image: linear-gradient(to right, #fa5a5a 0%, #f99595 100%);
+.choose-list {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
 
-
+    width: 20%
     position: absolute;
     top: 42%;
     right: 25%;
@@ -491,6 +492,7 @@ div.center-search {
   outline: none;
 }
 
+
 @font-face {
   font-family:"Simplifica";
   src: url("../SIMPLIFICA/Simplifica_Typeface.ttf") format("truetype");
@@ -503,7 +505,7 @@ div.center-search {
 }
 
 #mvhelptxt {
-  margin-top: -5vh;
+  margin-top: 6vh;
 }
 
 #about {
@@ -548,6 +550,19 @@ div.center-search {
   outline: none;
 }
 
+.to-scan-search {
+  font-size: 20px;
+  max-height: 30px;
+  float: right;
+  margin-right: -1vw;
+  margin-top: -6vh;
+
+  cursor: pointer;
+  background:none;
+  border: none;
+  outline: none;
+}
+
 /**************** All on index for the tab login ***********/
 .center-tabcontent {
   height: 36%;
@@ -555,6 +570,15 @@ div.center-search {
 
   position: absolute;
   top: 22%;
+  left: 26%;
+}
+
+.center-tabcontent-list{
+  height: 36%;
+  width: 49%;
+
+  position: absolute;
+  top: 5%;
   left: 26%;
 }
 
