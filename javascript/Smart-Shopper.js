@@ -20,10 +20,10 @@ var addNewProduct = function (productName) {
 
 $("#save-selection").click(function() {
   var radios = document.getElementsByName('list-name');
-  console.log("afdsfasdfdsfsd");
   for (var i=0; i < radios.length; i++) {
     if (radios[i].checked) {
       localStorage.setItem('currentList', radios[i].value);
+      console.log(radios[i].value);
       break;
     }
   }

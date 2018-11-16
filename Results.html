@@ -36,12 +36,12 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="javascript/Smart-Shopper.js"></script>
     <script>
-      console.log(localStorage.getItem('currentList'));
       $("#result-img").attr("src", localStorage.getItem("imageName"));
       var imgName = localStorage.getItem("imageName");
       var lists = JSON.parse(localStorage.getItem("listsInfo"));
       var nameOfList = localStorage.getItem("currentList");
-
+      console.log(lists);
+      console.log(nameOfList);
       // Get the list for the currently search restrictions
       var list = [];
       for (var i=0; i < lists.length; i++) {
@@ -50,10 +50,11 @@
           break;
         }
       }
+      console.log(list);
       var items = list['restrictions'].map(a => a.toLowerCase());
 
       if (imgName == "images/Wine.png") {
-        var ingredients = ['wine', 'sugar', 'alcohol, ''sulfur dioxide', 'grape', 'water', 'yeast'];
+        var ingredients = ['wine', 'sugar', 'alcohol', 'sulfur dioxide', 'grape', 'water', 'yeast'];
         var first = true;
         for (var i=0; i < items.length; i++) {
           for (var j=0; j < ingredients.length; j++) {
@@ -69,7 +70,7 @@
         }
 
         if (first) {
-          document.getElementById("containing").replaceWith("");
+          document.getElementById("containing").innerText = "";
           document.getElementById("not-safe").innerText = "! SAFE TO DRINK !";
         }
         else {
@@ -95,7 +96,7 @@
         }
 
         if (first) {
-          document.getElementById("containing").replaceWith("");
+          document.getElementById("containing").innerText = "";
         }
         else {
           document.getElementById("not-safe").innerText = "! NOT SAFE TO EAT !";
@@ -120,7 +121,7 @@
         }
 
         if (first) {
-          document.getElementById("containing").replaceWith("");
+          document.getElementById("containing").innerText = "";
         }
         else {
           document.getElementById("not-safe").innerText = "! NOT SAFE TO EAT !";

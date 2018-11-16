@@ -86,9 +86,9 @@
         var lists = JSON.parse(localStorage.getItem('listsInfo') || "[]");
         console.log(lists.length);
         for (var i=0; i < lists.length; i++) {
-          console.log(2);
-          $("#load-lists").replaceWith("<input type='radio'" + " name='list-name' value=" +
-                          lists[i]['listName'] + "> " + lists[i]['listName'] + "<br><br>" +
+          var name = "\"" + lists[i]['listName'] + "\"";
+          console.log(name);
+          $("#load-lists").replaceWith("<input type='radio'" + " name='list-name' value=" + name + "> " + lists[i]['listName'] + "<br><br>" +
                           "<dummy id='load-lists'></dummy>");
 
         }
