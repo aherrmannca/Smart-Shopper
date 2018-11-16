@@ -1,3 +1,81 @@
+var addNewList = function (listName) {
+    // retrieve it (Or create a blank array if there isn't any info saved yet),
+    var lists = JSON.parse(localStorage.getItem('listsInfo') || "[]");
+    // add to it,
+    restrictions = JSON.parse(localStorage.getItem('productsInfo') || "[]");
+    lists.push({listName: listName, restrictions: restrictions});
+
+    // then put it back.
+    localStorage.setItem('listsInfo', JSON.stringify(lists));
+}
+
+var addNewProduct = function (productName) {
+    // retrieve it (Or create a blank array if there isn't any info saved yet),
+    var products = JSON.parse(localStorage.getItem('productsInfo') || "[]");
+    // add to it,
+    products.push(productName);
+    // then put it back.
+    localStorage.setItem('productsInfo', JSON.stringify(products));
+}
+
+$("#save-selection").click(function() {
+  var radios = document.getElementsByName('list-name');
+  console.log("afdsfasdfdsfsd");
+  for (var i=0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      localStorage.setItem('currentList', radios[i].value);
+      break;
+    }
+  }
+
+  localStorage.setItem('productsInfo', []);
+});
+
+$("#save-list").click(function() {
+  // Add the new list
+  var nameOfList = document.getElementById("name-text").value;
+  addNewList(nameOfList);
+
+  // Set which list is currently being used
+  localStorage.setItem('currentList', nameOfList);
+
+  var tester = JSON.parse(localStorage.getItem('listsInfo'));
+/*
+  console.log(nameOfList);
+  console.log(tester[0]['listName']);
+  console.log(tester[0]['restrictions']);
+  console.log(tester[1]['listName']);
+  console.log(tester[1]['restrictions']);
+  */
+  console.log(tester);
+
+  // Reset the product list within addNewProduct!
+  localStorage.setItem('productsInfo', []);
+});
+
+$("#user-login").click(function() {
+    if ($(usercode).val() == "cogs120" && $(passcode).val() == "test") {
+        addNewProduct('gluten');
+        addNewProduct('wine');
+        addNewList('No gluten and no wine!!!');
+        localStorage.setItem('productsInfo', []);
+
+        addNewProduct("Dairy");
+        addNewProduct("Eggs");
+        addNewProduct("Honey");
+        addNewProduct("Casein");
+        addNewProduct("Gelatin");
+        addNewProduct("Insinglass");
+        addNewProduct("L-cysteine");
+        addNewProduct("Whey");
+        addNewList('Dairy Free! Are Oreos really Vegan?');
+        localStorage.setItem('productsInfo', []);
+
+        window.location="lists.html";
+    }
+
+});
+
 function openLogin(evt, buttonName) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -81,12 +159,23 @@ function addRestriction(item) {
 function deleteAll() {
   var items = document.getElementsByClassName("delete");
   while(items[0]) {
+    localStorage.setItem('productsInfo', []);
     items[0].closest('div').remove();
   }
 }
 
 /* When clicking on delete for creating a list*/
 $(document).on("click", ".delete", function(e) {
+  // First delete the item from local storage
+  var search_term = $(this).next().text();
+  var array = JSON.parse(localStorage.getItem('productsInfo'));
+  var index = array.indexOf(search_term);
+
+  if (index !== -1) {
+    array.splice(index, 1);
+  }
+  localStorage.setItem('productsInfo', JSON.stringify(array));
+
   $(this).closest('div').remove();
 });
 
@@ -108,10 +197,12 @@ $(document).on("keypress", "#restriction-text", function (e) {
   var key = e.which;
   if(key == 13)  // the enter key code
   {
+    addNewProduct($(this).val());
+
     $(this).replaceWith("<div class='restrictions'><p class='restriction'><font size='5'>\xa0\xa0" +
-                        "<button class='delete'>-</button>\xa0\xa0" +
+                        "<button class='delete'>-</button>\xa0\xa0<dummy>" +
                         $(this).val() +
-                        "</font></p></div><button id='add' class='add-new'>+ Add</button>");
+                        "</dummy></font></p></div><button id='add' class='add-new'>+ Add</button>");
   }
 });
 
@@ -146,6 +237,7 @@ function chooseImage() {
 }
 
 $(".btn-logout").click(function(e) {
+  localStorage.setItem('productsInfo', []);
   window.location="index.html";
 });
 
@@ -154,6 +246,7 @@ $(".to-scan-search-recipes").click(function(e) {
 });
 
 $(".to-scan-search").click(function(e) {
+  localStorage.setItem('productsInfo', []);
   window.location="Scan-Search-Recipes.html";
 });
 
@@ -177,15 +270,6 @@ $(".to-results").click(function(e) {
 /* Go to results page */
 $(".to-lists").click(function(e) {
   window.location="lists.html";
-});
-
-$( function() {
-  var availableTags = [
-    "Pops"
-  ];
-  $( "#search-text" ).autocomplete({
-    source: availableTags
-  });
 });
 
 /* A bit sloppy, but couldn't get the for loop version to work */

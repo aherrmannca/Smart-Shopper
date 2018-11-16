@@ -34,7 +34,6 @@ button {
   margin-left: -10px;
 }
 
-.create-user {}
 
 #home-button {
   max-height: 65px;
@@ -180,6 +179,9 @@ body {
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
 }
+
+#save-list {}
+#load-lists {}
 
 #bar-white {
   width:            100vw;
@@ -421,7 +423,7 @@ div.center-search {
   font-size: 15px;
 }
 
-#check {
+.checks {
   margin-left: 13px;
   float: left;
   color: #007AFF;
@@ -429,6 +431,8 @@ div.center-search {
   margin-top: 0px;
   margin-left: 15px
 }
+
+#check {}
 
 #contains {}
 
@@ -466,6 +470,11 @@ div.center-search {
   height: 20px;
 }
 
+.list-name {
+  margin-top: -20px;
+  font-size: 200%;
+  height: 20px;
+}
 
 .arrow {
   color: #007AFF;
@@ -478,6 +487,24 @@ div.center-search {
 .continue {
   float: left;
   margin-left: -30px;
+}
+
+#user-login {
+  float: left;
+  margin-left: -30px;
+}
+
+.continue-login {
+  font-size: 20px;
+  max-height: 30px;
+  float: right;
+  margin-right: -1vw;
+  margin-top: -6vh;
+
+  cursor: pointer;
+  background:none;
+  border: none;
+  outline: none;
 }
 
 /* Button to go to search, scan, and recipes*/

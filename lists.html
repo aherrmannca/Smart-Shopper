@@ -16,15 +16,10 @@
     <button class="btn-logout">
       <h2 class="back-arrow">&#8249;<h3 class="back">&nbsp; Logout</h3></h2>
     </button>
+    <font size="1" style="position: relative; top: -7px;">
+      -Your lists will be deleted if you logout
+    </font>
     <div>
-    <!-- Creating the homepage title -->
-
-<!--
-    <div id="mvhelptxt">
-      <h2 class="helptxt">Create a new list of restrictions<h2>
-      <h2><center>or use a previous one!</center><h2>
-    </div>
--->
     <div class="center-tabcontent-list">
       <!-- Tab links -->
       <div class="tab">
@@ -62,7 +57,7 @@
             <button id="add" class="add-new">+ Add</button>
 
         <div>
-          <button class="to-scan-search" class="create-user">
+          <button id="save-list" class="to-scan-search">
             <h3 class="continue">Continue <h2 class="arrow">&nbsp;&#8250;</h2></h3>
           </button>
         </div>
@@ -72,14 +67,12 @@
         <h2>Choose&nbsp;a&nbsp;Previously&nbsp;Created&nbsp;List</h2>
         <h3>
         <form action="">
-          <input type="radio" name="list-name" value="ketogenic"> Ketogenic<br><br>
-          <input type="radio" name="list-name" value="gluten"> Gluten<br><br>
-          <input type="radio" name="list-name" value="vegan"> Vegan
+          <font id="load-lists" color="red">Create a list and it will be saved here!</font>
         </form>
       </h3>
 
         <div>
-          <button class="to-scan-search" class="create-user">
+          <button id="save-selection" class="to-scan-search">
             <h3 class="continue">Continue <h2 class="arrow">&nbsp;&#8250;</h2></h3>
           </button>
         </div>
@@ -90,6 +83,16 @@
     <script>
       // Get the element with id="defaultOpen" and click on it
       function openDefault() {
+        var lists = JSON.parse(localStorage.getItem('listsInfo') || "[]");
+        console.log(lists.length);
+        for (var i=0; i < lists.length; i++) {
+          console.log(2);
+          $("#load-lists").replaceWith("<input type='radio'" + " name='list-name' value=" +
+                          lists[i]['listName'] + "> " + lists[i]['listName'] + "<br><br>" +
+                          "<dummy id='load-lists'></dummy>");
+
+        }
+
         document.getElementById("defaultOpen").click();
       }
     </script>

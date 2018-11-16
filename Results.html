@@ -17,12 +17,12 @@
       </div>
 
       <div>
-        <h2 id="not-safe">! NOT SAFE TO EAT !</h2>
+        <h2 id="not-safe">! SAFE TO EAT !</h2>
       </div>
 
       <div>
-        <h2 id="containing"><br>Contains:<br></h2>
-        <h2 id="check">&#10004; <h2 id="contains">&nbsp;Gluten</h2></h2>
+        <h2 id="containing">Contains:<br></h2>
+        <dummy id="contains"></dummy>
       </div>
 
       <div>
@@ -36,14 +36,96 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="javascript/Smart-Shopper.js"></script>
     <script>
+      console.log(localStorage.getItem('currentList'));
       $("#result-img").attr("src", localStorage.getItem("imageName"));
       var imgName = localStorage.getItem("imageName");
+      var lists = JSON.parse(localStorage.getItem("listsInfo"));
+      var nameOfList = localStorage.getItem("currentList");
+
+      // Get the list for the currently search restrictions
+      var list = [];
+      for (var i=0; i < lists.length; i++) {
+        if (lists[i]['listName'].localeCompare(nameOfList) == 0) {
+          list = lists[i];
+          break;
+        }
+      }
+      var items = list['restrictions'].map(a => a.toLowerCase());
 
       if (imgName == "images/Wine.png") {
-        document.getElementById("check").replaceWith("");
-        document.getElementById("contains").replaceWith("");
-        document.getElementById("containing").replaceWith("");
-        document.getElementById("not-safe").innerText = "! SAFE TO DRINK !";
+        var ingredients = ['wine', 'sugar', 'alcohol, ''sulfur dioxide', 'grape', 'water', 'yeast'];
+        var first = true;
+        for (var i=0; i < items.length; i++) {
+          for (var j=0; j < ingredients.length; j++) {
+            if (items[i].localeCompare(ingredients[j]) == 0) {
+              if(first) {
+                first = false;
+              }
+              $("#contains").replaceWith("<h2 class='checks'>&#10004; <h2>" +
+                            "&nbsp;" + items[i] + "</h2></h2>" +
+                            "<dummy id='contains'></dummy>")
+            }
+          }
+        }
+
+        if (first) {
+          document.getElementById("containing").replaceWith("");
+          document.getElementById("not-safe").innerText = "! SAFE TO DRINK !";
+        }
+        else {
+          document.getElementById("not-safe").innerText = "! NOT SAFE TO DRINK !";
+          $("#dummy").replaceWith("");
+        }
+      }
+      else if (imgName == "images/Pops.png") {
+        var ingredients = ['pops', 'gluten', 'corn', 'sugar', 'corn syrup', 'molasses',
+                          'salt', 'partially hydrogenated vegetable oil'];
+        var first = true;
+        for (var i=0; i < items.length; i++) {
+          for (var j=0; j < ingredients.length; j++) {
+            if (items[i].localeCompare(ingredients[j]) == 0) {
+              if(first) {
+                first = false;
+              }
+              $("#contains").replaceWith("<h2 class='checks'>&#10004; <h2>" +
+                            "&nbsp;" + items[i] + "</h2></h2>" +
+                            "<dummy id='contains'></dummy>")
+            }
+          }
+        }
+
+        if (first) {
+          document.getElementById("containing").replaceWith("");
+        }
+        else {
+          document.getElementById("not-safe").innerText = "! NOT SAFE TO EAT !";
+          $("#dummy").replaceWith("");
+        }
+      }
+      else if (imgName == "images/Oreos.png") {
+        var ingredients = ['oreos', 'gluten', 'sugar', 'palm oil', 'soybean oil', 'canola oil',
+                          'cocoa', 'high fructose corn syrup', 'salt', 'corn starch'];
+        var first = true;
+        for (var i=0; i < items.length; i++) {
+          for (var j=0; j < ingredients.length; j++) {
+            if (items[i].localeCompare(ingredients[j]) == 0) {
+              if(first) {
+                first = false;
+              }
+              $("#contains").replaceWith("<h2 class='checks'>&#10004; <h2>" +
+                            "&nbsp;" + items[i] + "</h2></h2>" +
+                            "<dummy id='contains'></dummy>")
+            }
+          }
+        }
+
+        if (first) {
+          document.getElementById("containing").replaceWith("");
+        }
+        else {
+          document.getElementById("not-safe").innerText = "! NOT SAFE TO EAT !";
+          $("#dummy").replaceWith("");
+        }
       }
       else if (imgName != "images/Pops.png" && imgName != "images/Oreos.png") {
         document.getElementById("check").replaceWith("");
