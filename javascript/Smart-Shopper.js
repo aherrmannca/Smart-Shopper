@@ -56,8 +56,7 @@ $("#save-list").click(function() {
 $("#user-login").click(function() {
     if ($(usercode).val() == "cogs120" && $(passcode).val() == "test") {
         addNewProduct('gluten');
-        addNewProduct('wine');
-        addNewList('No gluten and no wine!!!');
+        addNewList('No gluten!!!');
         localStorage.setItem('productsInfo', []);
 
         addNewProduct("Dairy");
