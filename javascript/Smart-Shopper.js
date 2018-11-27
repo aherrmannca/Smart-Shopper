@@ -156,6 +156,15 @@ function addRestriction(item) {
 
 /* Delete all elements in the list */
 function deleteAll() {
+  elm = document.getElementById("restriction-text");
+
+  if(elm) {
+    $(elm).replaceWith("<div class='restrictions'><p class='restriction'><font size='5'>\xa0\xa0" +
+                        "<button class='delete'>-</button>\xa0\xa0<dummy>" +
+                        "test" +
+                        "</dummy></font></p></div><button id='add' class='add-new'>+ Add</button>");
+  }
+
   var items = document.getElementsByClassName("delete");
   while(items[0]) {
     localStorage.setItem('productsInfo', []);
@@ -211,6 +220,10 @@ $(".btn-back").click(function(e) {
 
 $(".btn-back-homepage").click(function(e) {
   window.location="lists.html";
+});
+
+$(".btn-back-search").click(function(e) {
+  window.location="scan-search-recipes.html";
 });
 
 $("#pops").click(function() {

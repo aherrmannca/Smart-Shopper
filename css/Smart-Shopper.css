@@ -138,6 +138,17 @@ body {
   outline: none;
 }
 
+.btn-back-search {
+  text-align: left;
+  font-size: 20px;
+  max-height: 30px;
+
+  cursor: pointer;
+  background:none;
+  border: none;
+  outline: none;
+}
+
 /* Back buttons */
 .btn-back {
   text-align: left;
